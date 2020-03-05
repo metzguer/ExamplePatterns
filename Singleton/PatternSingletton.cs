@@ -7,17 +7,25 @@ namespace Singleton
     public class PatternSingletton
     {
         private static PatternSingletton _instance = null ;
-        public string mensaje = "";
-
-        protected PatternSingletton()
+        public string ConexionDB = "";
+        //en la primera instancia asinga la cadena de conexion en ConnexionDb
+        //el objeto se crea una sola vez
+        private PatternSingletton()
         {
-            mensaje = "Intance unique";
+            ConexionDB = "Server=(local);Database=nameDatabase; Trusted_Connection=true;";
         }
-
-        public static PatternSingletton instance {
+        //despues de haber construido el objeto, en su segunda llamada solo se ejecutara la instancia
+        //orden de ejecucion de primera instancia :
+        //metodo Instance / get /(_instance==null) new PatternSingleton(); / string ConnexionDb="" / ConexionDB="cadena de conexion" en constructor / return _instance
+        //orden de ejecucion de llamados 2do, 3ro, etc. :
+        //metodo Instance / get /(_instance==null) new PatternSingleton(); / return _instance
+        public static PatternSingletton Instance {
             get
             {
-                return (_instance == null) ? new PatternSingletton() : null ; 
+                if (_instance==null)
+                    _instance = new PatternSingletton();
+
+                return _instance; 
             }
         }
 

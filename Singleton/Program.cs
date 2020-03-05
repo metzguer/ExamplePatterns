@@ -6,9 +6,20 @@ namespace Singleton
     {
         static void Main(string[] args)
         {
-            var msgSingleton = PatternSingletton.instance.mensaje; 
+            int op = 0;
 
-            Console.WriteLine(msgSingleton);
+            while (op!=1) {
+
+                var msgSingleton = PatternSingletton.Instance.ConexionDB;
+
+                Console.WriteLine("Conexion a DB: "+msgSingleton);
+
+                Console.WriteLine("Desea voler a obtener la conexión ?");
+                Console.WriteLine("Presione 1 para finalizar la ejecución");
+
+                op = Convert.ToInt32( Console.ReadLine() );
+            } 
+           
         }
     }
 }
